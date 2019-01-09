@@ -11,6 +11,7 @@ import com.claudiotessaro.curso.domain.Categoria;
 
 @RestController
 @RequestMapping(value="/categorias")
+
 public class CategoriaResource {
 	
 	
