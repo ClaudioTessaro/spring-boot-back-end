@@ -1,0 +1,65 @@
+[33mcommit cf45055abe068652b8db080e6bfde68acde42cdd[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: Claudio Tessaro <claudio0190@hotmail.com>
+Date:   Thu Jan 10 13:31:15 2019 -0300
+
+    Criação do Endpoint de cliente
+
+[33mcommit ecfcb5a8906c306deca6f04f277d32cd175120bd[m
+Author: Claudio Tessaro <claudio0190@hotmail.com>
+Date:   Wed Jan 9 23:57:34 2019 -0300
+
+    Criação do Enum para TipoCliente, criacao da classe telefone e enderecos assim como o mapeamento
+
+[33mcommit 1013c9aa095e9d654bbe9a90da0baae89b280e7c[m
+Author: Claudio Tessaro <claudio0190@hotmail.com>
+Date:   Wed Jan 9 23:09:17 2019 -0300
+
+    Criação das instancias em estado e cidades
+
+[33mcommit d0b9cc044041e88d629be9a4a3bc88de25010f47[m
+Author: Claudio Tessaro <claudio0190@hotmail.com>
+Date:   Wed Jan 9 21:42:42 2019 -0300
+
+    Ajustes no endpoint /categorias/{id}
+
+[33mcommit 212f35306850f06106bd070bfaa6ec261d9305bb[m
+Author: Claudio Tessaro <claudio0190@hotmail.com>
+Date:   Wed Jan 9 21:10:07 2019 -0300
+
+    Criação dos relacionamentos entre categoria e produtos, assim como suas instancias
+
+[33mcommit edbf040f6f0b539c8a4a9337263f302f8f18c867[m
+Author: Claudio Tessaro <claudio0190@hotmail.com>
+Date:   Wed Jan 9 20:12:30 2019 -0300
+
+    Criando operacao de instanciacao
+
+[33mcommit a1b75a5fb34e47ba838f51dc347c5b7cc7c52563[m
+Author: Claudio Tessaro <claudio0190@hotmail.com>
+Date:   Wed Jan 9 20:01:53 2019 -0300
+
+    Criação da camada Repository e da Camada de serviço do sistema para categoria
+
+[33mcommit 35aa34a3b0e31bd3431ca542131ce19fcfa6f559[m
+Author: Claudio Tessaro <claudio0190@hotmail.com>
+Date:   Tue Jan 8 23:05:32 2019 -0300
+
+    Criando a persistencia objeto-relacional
+
+[33mcommit f84b2c2ac6b79a213178ee8649196498995ce1dc[m
+Author: Claudio Tessaro <claudio0190@hotmail.com>
+Date:   Tue Jan 8 22:50:43 2019 -0300
+
+    Categoria dominio criada
+
+[33mcommit cbf03474a6d6a13de677ce008931d76b353b5aa8[m
+Author: Claudio Tessaro <claudio0190@hotmail.com>
+Date:   Tue Jan 8 22:33:01 2019 -0300
+
+    REST Testado
+
+[33mcommit c9e8e1146d217452b9839cb24cd0519dc7d690af[m
+Author: Claudio Tessaro <claudio0190@hotmail.com>
+Date:   Tue Jan 8 22:08:03 2019 -0300
+
+    Projeto criado
