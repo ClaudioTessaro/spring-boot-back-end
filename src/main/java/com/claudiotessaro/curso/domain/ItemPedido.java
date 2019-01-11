@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class ItemPedido implements Serializable { //Aqui temos uma classe de associação entre pedido e produto
 	
@@ -13,6 +15,7 @@ public class ItemPedido implements Serializable { //Aqui temos uma classe de ass
 
 	
 	//Aqui, nos utilizaremos a classe auxiliar como id da classe
+	@JsonIgnore
 	@EmbeddedId
 	private ItemPedidoPK id = new ItemPedidoPK();
 	
@@ -66,6 +69,7 @@ public class ItemPedido implements Serializable { //Aqui temos uma classe de ass
 	}
 	
 	//Criacao desses getters, é para não ser necessario acessar o itempedidopk para poder acessar os id's desejado
+	@JsonIgnore //Porque os getters entende que deve ser serializado, portanto, aqui tem uma referencia ciclica
 	public Pedido getPedido() {
 		return id.getPedido();
 	}

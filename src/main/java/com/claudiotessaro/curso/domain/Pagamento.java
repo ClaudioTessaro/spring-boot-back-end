@@ -11,6 +11,7 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
 import com.claudiotessaro.curso.domain.enums.EstadoPagamento;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED) //Essa anotação serve para criar o mapeamento de herança. O tipo joined é a criação de uma tabela com todas as informações, e o single serve para criação da quantidade de tabelas iguais a quantidade de classes filho
@@ -25,6 +26,7 @@ public abstract class Pagamento  implements Serializable{ //Criação da classe 
 	@OneToOne
 	@JoinColumn(name="pedido_id")
 	@MapsId  //Essa anotação serve para garantir que o id do pagamento será o msm do pedido
+	@JsonBackReference
 	private Pedido pedido;
 	
 	public Pagamento() {
