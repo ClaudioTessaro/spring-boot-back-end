@@ -13,7 +13,7 @@ public class CategoriaService {
 	@Autowired // Anotacao responsavel por instanciar automaticamente pelo spring
 	private CategoriaRepository repo;
 
-	public Categoria buscar(Integer id) {
+	public Categoria find(Integer id) {
 		Categoria obj = repo.findOne(id);
 		if(obj == null){
 			throw new ObjectNotFoundException("Objeto não não encontrado! Id: "+id+", Tipo: "+Categoria.class.getName());
@@ -22,8 +22,17 @@ public class CategoriaService {
 
 	}
 	
+	//Criação do metodo de inserção
 	public Categoria insert(Categoria obj) {
 		obj.setId(null); //Serve para confirmar que é uma inserção de um objeto novo
+		return repo.save(obj);
+	}
+	
+	//Criacao do metodo de atualização
+	public Categoria update(Categoria obj) {
+		
+		//Serve para informar a existencia de um id, pois a atualização so é possivel com a existencia de um id
+		find(obj.getId());
 		return repo.save(obj);
 	}
 
