@@ -1,10 +1,12 @@
 package com.claudiotessaro.curso.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.claudiotessaro.curso.domain.Categoria;
 import com.claudiotessaro.curso.repository.CategoriaRepository;
+import com.claudiotessaro.curso.services.exceptions.DataIntegrityService;
 import com.claudiotessaro.curso.services.exceptions.ObjectNotFoundException;
 
 @Service // Anotacao responsavel por informar ao spring que a classe faz parte da camada de servico
@@ -36,5 +38,15 @@ public class CategoriaService {
 		return repo.save(obj);
 	}
 
+	public void delete(Integer id) {
+		find(id); //Para caso o id nao exista, ele lançar um exception
+		try {
+		repo.delete(id);
+		}catch(DataIntegrityViolationException e) {
+			throw new DataIntegrityService("Não é possivel excluir uma categoria que possui produtos");
+		}
+		
+		
+	}
 
 }

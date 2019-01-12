@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.claudiotessaro.curso.services.exceptions.DataIntegrityService;
 import com.claudiotessaro.curso.services.exceptions.ObjectNotFoundException;
 
 @ControllerAdvice  //Para não poluirmos a classe service com varios try catch, já que a service tem metodos com poucos codigos, criamos uma exception personalizada, devolvendo as exceções do protocolo HTTP no formato json 
@@ -17,6 +18,13 @@ public class ResourceExceptionHandler {
 		StandardError err = new StandardError(HttpStatus.NOT_FOUND.value(), e.getMessage(), System.currentTimeMillis());
 		
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
+	}
+
+	@ExceptionHandler(DataIntegrityService.class)
+	public ResponseEntity<StandardError> dataIntegrity(DataIntegrityService e,HttpServletRequest request){
+		StandardError err = new StandardError(HttpStatus.BAD_REQUEST.value(), e.getMessage(), System.currentTimeMillis());
+		
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
 	}
 
 }
