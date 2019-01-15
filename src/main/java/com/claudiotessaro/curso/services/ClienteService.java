@@ -2,6 +2,8 @@ package com.claudiotessaro.curso.services;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -9,10 +11,16 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import com.claudiotessaro.curso.domain.Categoria;
+import com.claudiotessaro.curso.domain.Cidade;
 import com.claudiotessaro.curso.domain.Cliente;
+import com.claudiotessaro.curso.domain.Endereco;
+import com.claudiotessaro.curso.domain.enums.TipoCliente;
 import com.claudiotessaro.curso.domain.Cliente;
 import com.claudiotessaro.curso.dto.ClienteDTO;
+import com.claudiotessaro.curso.dto.ClienteNewDTO;
 import com.claudiotessaro.curso.repository.ClienteRepository;
+import com.claudiotessaro.curso.repository.EnderecoRepository;
 import com.claudiotessaro.curso.services.exceptions.DataIntegrityService;
 import com.claudiotessaro.curso.services.exceptions.ObjectNotFoundException;
 
@@ -22,6 +30,9 @@ public class ClienteService {
 	@Autowired // Anotacao responsavel por instanciar automaticamente pelo spring
 	private ClienteRepository repo;
 
+	@Autowired
+	private EnderecoRepository enderecoRepository;
+	
 	public Cliente find(Integer id) {
 		Cliente obj = repo.findOne(id);
 		if(obj == null){
@@ -70,5 +81,32 @@ public class ClienteService {
 		public Cliente fromDTO(ClienteDTO objDto) {
 			return new Cliente(objDto.getId(), objDto.getNome(),objDto.getEmail(), null, null);
 		}
+		
+		@Transactional
+		public Cliente insert(Cliente obj) {
+			obj.setId(null); //Serve para confirmar que é uma inserção de um objeto novo
+			repo.save(obj);
+			enderecoRepository.save(obj.getEnderecos());
+			return obj;
+		}
+
+		
+		public Cliente fromDTO(ClienteNewDTO objDto) {
+			Cliente cli = new Cliente(null, objDto.getNome(), objDto.getEmail(), objDto.getCpfOuCnpj(), TipoCliente.toEnum(objDto.getTipo()));
+			Cidade cid = new Cidade(objDto.getCidadeId(), null, null);
+			Endereco end = new Endereco(null, objDto.getLogradouro(), objDto.getNumero(), objDto.getComplemente(), objDto.getBairro(), objDto.getCep(), cli,cid);
+			
+			cli.getEnderecos().add(end);
+			cli.getTelefones().add(objDto.getTelefone1());
+			if(objDto.getTelefone2() !=null) {
+				cli.getTelefones().add(objDto.getTelefone2());
+			}
+			if(objDto.getTelefone3() !=null) {
+				cli.getTelefones().add(objDto.getTelefone3());
+			}
+			return cli;
+		}
+		
+	
 
 }
