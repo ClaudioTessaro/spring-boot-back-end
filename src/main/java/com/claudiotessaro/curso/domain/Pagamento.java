@@ -11,11 +11,13 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
 import com.claudiotessaro.curso.domain.enums.EstadoPagamento;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED) //Essa anotação serve para criar o mapeamento de herança. O tipo joined é a criação de uma tabela com todas as informações, e o single serve para criação da quantidade de tabelas iguais a quantidade de classes filho
+@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type") //minha classe terá um campo adicional com a palavra type
 public abstract class Pagamento  implements Serializable{ //Criação da classe do tipo abstract, para certificar que eu nao poderei instanciar o pagamento e sim os tipos de pagamentos
 
 	private static final long serialVersionUID = 1L;

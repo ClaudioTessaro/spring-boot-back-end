@@ -8,23 +8,21 @@ import javax.persistence.Entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class ItemPedido implements Serializable { //Aqui temos uma classe de associação entre pedido e produto
-	
+public class ItemPedido implements Serializable { // Aqui temos uma classe de associação entre pedido e produto
+
 	private static final long serialVersionUID = 1L;
 
-
-	
-	//Aqui, nos utilizaremos a classe auxiliar como id da classe
+	// Aqui, nos utilizaremos a classe auxiliar como id da classe
 	@JsonIgnore
 	@EmbeddedId
 	private ItemPedidoPK id = new ItemPedidoPK();
-	
+
 	private Double desconto;
 	private Integer quantidade;
 	private Double preco;
-	
+
 	public ItemPedido() {
-		
+
 	}
 
 	public ItemPedido(Pedido pedido, Produto produto, Double desconto, Integer quantidade, Double preco) {
@@ -36,8 +34,20 @@ public class ItemPedido implements Serializable { //Aqui temos uma classe de ass
 		this.preco = preco;
 	}
 
+	public double getSubTotal() {
+		return (preco - desconto) * quantidade;
+	}
+
 	public ItemPedidoPK getId() {
 		return id;
+	}
+
+	public void setPedido(Pedido pedido) {
+		id.setPedido(pedido);
+	}
+
+	public void setProduto(Produto produto) {
+		id.setProduto(produto);
 	}
 
 	public void setId(ItemPedidoPK id) {
@@ -67,13 +77,15 @@ public class ItemPedido implements Serializable { //Aqui temos uma classe de ass
 	public void setPreco(Double preco) {
 		this.preco = preco;
 	}
-	
-	//Criacao desses getters, é para não ser necessario acessar o itempedidopk para poder acessar os id's desejado
-	@JsonIgnore //Porque os getters entende que deve ser serializado, portanto, aqui tem uma referencia ciclica
+
+	// Criacao desses getters, é para não ser necessario acessar o itempedidopk para
+	// poder acessar os id's desejado
+	@JsonIgnore // Porque os getters entende que deve ser serializado, portanto, aqui tem uma
+				// referencia ciclica
 	public Pedido getPedido() {
 		return id.getPedido();
 	}
-	
+
 	public Produto getProduto() {
 		return id.getProduto();
 	}
@@ -102,6 +114,5 @@ public class ItemPedido implements Serializable { //Aqui temos uma classe de ass
 			return false;
 		return true;
 	}
-	
 
 }
