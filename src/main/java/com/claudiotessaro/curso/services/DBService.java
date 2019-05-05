@@ -123,7 +123,7 @@ public class DBService {
 		
 		//Criacao das instancias cliente e endereco
 		
-		Cliente cli1 = new Cliente(null, "Maria Silva", "maria@gmail.com", "36378912377", TipoCliente.PESSOAFISICA);
+		Cliente cli1 = new Cliente(null, "Maria Silva", "tessaro0190@gmail.com", "36378912377", TipoCliente.PESSOAFISICA);
 		cli1.getTelefones().addAll(Arrays.asList("3333333","44444"));
 		
 		Endereco e1 = new Endereco(null, "Rua flores","300", "Apt 203", "Jardim","382220", cli1,c1);
