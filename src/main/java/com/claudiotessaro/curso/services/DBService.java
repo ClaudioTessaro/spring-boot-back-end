@@ -20,6 +20,7 @@ import com.claudiotessaro.curso.domain.PagamentoComCartao;
 import com.claudiotessaro.curso.domain.Pedido;
 import com.claudiotessaro.curso.domain.Produto;
 import com.claudiotessaro.curso.domain.enums.EstadoPagamento;
+import com.claudiotessaro.curso.domain.enums.Perfil;
 import com.claudiotessaro.curso.domain.enums.TipoCliente;
 import com.claudiotessaro.curso.repository.CategoriaRepository;
 import com.claudiotessaro.curso.repository.CidadeRepository;
@@ -130,13 +131,20 @@ public class DBService {
 		Cliente cli1 = new Cliente(null, "Maria Silva", "tessaro0190@gmail.com", "36378912377", TipoCliente.PESSOAFISICA,be.encode("123"));
 		cli1.getTelefones().addAll(Arrays.asList("3333333","44444"));
 		
+		Cliente cli2 = new Cliente(null, "Ana Costa", "claudio0190@hotmail.com", "36378912888", TipoCliente.PESSOAFISICA,be.encode("123"));
+		cli2.addPerfil(Perfil.ADMIN);
+		
+		cli2.getTelefones().addAll(Arrays.asList("333333553","4444455"));
+		
 		Endereco e1 = new Endereco(null, "Rua flores","300", "Apt 203", "Jardim","382220", cli1,c1);
 		Endereco e2 = new Endereco(null, "Avenida Matos","320", "Sala 800", "Centro","382220", cli1,c2);
+		Endereco e3 = new Endereco(null, "Avenida Floriano","321", null, "Centro","382220", cli2,c2);
 		
 		cli1.getEnderecos().addAll(Arrays.asList(e1,e2));
+		cli2.getEnderecos().addAll(Arrays.asList(e3));
 	
-		clienteRepository.save(Arrays.asList(cli1));
-		enderecoRepository.save(Arrays.asList(e1,e2));
+		clienteRepository.save(Arrays.asList(cli1,cli2));
+		enderecoRepository.save(Arrays.asList(e1,e2,e3));
 		
 		//Criacao das instancias pedido e forma de pagamento
 		
