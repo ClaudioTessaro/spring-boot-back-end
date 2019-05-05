@@ -115,4 +115,21 @@ public class ItemPedido implements Serializable { // Aqui temos uma classe de as
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append(getProduto().getNome());
+		builder.append(", Qte: ");
+		builder.append(getQuantidade());
+		builder.append(", Preco unitario: ");
+		builder.append(getPreco());
+		builder.append(", Subtotal: ");
+		builder.append(getSubTotal());
+		builder.append("\n");
+		
+		return builder.toString();
+	}
+	
+	
+
 }
